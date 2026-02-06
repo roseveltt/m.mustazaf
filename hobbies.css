@@ -1,0 +1,82 @@
+
+    
+ 
+ body {
+     background-color: black;
+    color: white;
+     margin: 0;
+    padding: 15px;
+ }
+
+ .site-title {
+     background-image: url('hobbies.png');
+     background-size: cover;
+     background-position: center;
+     color: white;
+    padding:90px 30px;
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+    margin-bottom: 30px;
+  }
+
+.about-container {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+
+.profile-img {
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 3px green solid;
+    flex-shrink: 0;
+}
+
+.about-text {
+      width: 100%;
+    font-size: 25px;
+    line-height: 1.6;
+    color: white;
+    padding-right: 0;
+    margin-right: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.head2  {
+    text-align: right;
+    margin: 20px;
+    padding: 100px;
+}
+
+.about-container2 {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    flex-direction: row-reverse;
+}
+
+.school-img {
+    spacing: 10px;
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 3px solid green;
+    flex-shrink: 0;
+}
+
+footer {
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    border-top: 3px solid green;    
+}
+
