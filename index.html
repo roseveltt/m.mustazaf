@@ -1,48 +1,776 @@
 <!DOCTYPE html>
 <html lang="en">
-<html>
-
 <head>
-    <meta charset="UTF-8"> 
-    <link rel="stylesheet" href="PersonalWeb.css">
-    <div class="site-title">
-    Mariam Mustazaf | Portfolio
-    </div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mariam Mustazaf | Portfolio</title>
+    <style>
+        :root {
+            --ink: #172033;
+            --muted: #647083;
+            --paper: #f7f8fc;
+            --panel: #ffffff;
+            --blue: #4f6fa8;
+            --blue-deep: #2f4f7f;
+            --violet: #6f6fa6;
+            --soft: #edf2f9;
+            --soft-2: #f3f6fb;
+            --line: #bfd0e7;
+            --rose: #9a526d;
+            --gold: #b7791f;
+            --gold-soft: #fff4d6;
+            --shadow: 0 18px 45px rgba(47, 79, 127, 0.14);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background:
+                linear-gradient(180deg, #f7f8fc 0%, #ffffff 44%, #edf2f9 100%);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        a {
+            color: var(--blue-deep);
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            border-bottom: 1px solid rgba(197, 206, 245, 0.9);
+            background: rgba(247, 248, 252, 0.95);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 10px 30px rgba(47, 79, 127, 0.08);
+        }
+
+        .nav-wrap {
+            width: min(1140px, calc(100% - 32px));
+            min-height: 76px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            gap: 6px;
+            flex-wrap: wrap;
+            padding: 6px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.72);
+        }
+
+        .nav-btn {
+            border: 1px solid transparent;
+            background: transparent;
+            color: var(--muted);
+            border-radius: 6px;
+            min-height: 38px;
+            padding: 8px 12px;
+            font: inherit;
+            font-size: 0.88rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background 160ms ease, color 160ms ease, box-shadow 160ms ease;
+        }
+
+        .brand-btn {
+            border-color: var(--line);
+            background: #ffffff;
+            color: var(--ink);
+            font-size: 0.96rem;
+            white-space: nowrap;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            color: #ffffff;
+            border-color: var(--blue);
+            background: linear-gradient(135deg, var(--blue), var(--violet));
+            box-shadow: 0 10px 22px rgba(47, 79, 127, 0.16);
+        }
+
+        main {
+            width: min(1140px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 42px 0 70px;
+        }
+
+        .page {
+            display: none;
+            min-height: calc(100vh - 178px);
+            animation: fade 180ms ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-head {
+            margin-bottom: 26px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--line);
+        }
+
+        .kicker {
+            color: var(--rose);
+            font-size: 0.78rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2 {
+            margin: 14px 0 18px;
+            font-family: Georgia, "Times New Roman", serif;
+            line-height: 1.05;
+            letter-spacing: 0;
+        }
+
+        h1 {
+            font-size: clamp(2.8rem, 7vw, 5.8rem);
+        }
+
+        h2 {
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+        }
+
+        h3 {
+            margin: 0 0 12px;
+            font-size: 1.35rem;
+            line-height: 1.2;
+        }
+
+        .intro-bio {
+            display: grid;
+            grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+            gap: 42px;
+            align-items: start;
+        }
+
+        .intro-copy {
+            padding-top: 10px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            width: fit-content;
+            color: var(--blue-deep);
+            background: var(--soft);
+            border: 2px solid var(--line);
+            border-radius: 999px;
+            padding: 7px 12px;
+            font-size: 0.82rem;
+            font-weight: 900;
+        }
+
+        .lede {
+            max-width: 720px;
+            color: #34425d;
+            font-size: clamp(1.03rem, 1.5vw, 1.22rem);
+        }
+
+        .hero-photo,
+        .media,
+        .slide-frame,
+        .thumb {
+            border: 3px solid var(--line);
+            box-shadow: var(--shadow);
+            background: var(--soft-2);
+        }
+
+        .hero-photo {
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .read-panel {
+            margin-top: 28px;
+            border: 2px solid var(--line);
+            border-left: 6px solid var(--blue);
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 12px 28px rgba(47, 79, 127, 0.10);
+            overflow: hidden;
+        }
+
+        .read-panel summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 18px 20px 16px;
+            color: var(--blue-deep);
+            font-size: 1.08rem;
+            font-weight: 900;
+            text-decoration: underline;
+            text-underline-offset: 8px;
+            text-decoration-thickness: 3px;
+        }
+
+        .read-panel summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .read-panel summary::after {
+            content: "";
+            color: var(--violet);
+        }
+
+        .read-panel[open] summary::after {
+            content: "";
+        }
+
+        .read-body {
+            padding: 0 20px 20px;
+        }
+
+        .read-body ul,
+        .panel ul {
+            margin: 0;
+            padding-left: 22px;
+        }
+
+        .read-body li + li,
+        .panel li + li {
+            margin-top: 10px;
+        }
+
+        .background-row,
+        .grid-feature {
+            display: grid;
+            grid-template-columns: minmax(240px, 0.42fr) minmax(0, 0.58fr);
+            gap: 34px;
+            align-items: center;
+            margin: 28px 0;
+        }
+
+        .grid-feature.reverse {
+            grid-template-columns: minmax(0, 0.58fr) minmax(240px, 0.42fr);
+        }
+
+        .grid-feature.reverse .media {
+            order: 2;
+        }
+
+        .media {
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .panel {
+            border: 2px solid var(--line);
+            border-left: 6px solid var(--blue);
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 22px;
+            box-shadow: 0 12px 28px rgba(47, 79, 127, 0.10);
+        }
+
+        .carousel {
+            border: 2px solid var(--line);
+            border-left: 6px solid var(--blue);
+            border-radius: 8px;
+            padding: 18px;
+            background: #ffffff;
+            box-shadow: 0 12px 28px rgba(47, 79, 127, 0.10);
+            margin-top: 22px;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 12px;
+        }
+
+        .slide {
+            flex: 0 0 min(82%, 780px);
+            scroll-snap-align: center;
+        }
+
+        .slide-frame {
+            aspect-ratio: 12 / 10;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .ai-carousel .slide-frame img {
+            object-fit: contain;
+        }
+
+        .ai-carousel .slide-frame {
+            aspect-ratio: 11 / 14;
+        }
+
+        .carousel-caption {
+            margin: 12px 0 0;
+            color: #34425d;
+            font-weight: 700;
+        }
+
+        .awards-grid,
+        .contact-grid {
+            display: grid;
+            gap: 18px;
+        }
+
+        .awards-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .contact-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .award-card,
+        .contact-card {
+            overflow: hidden;
+            border: 2px solid var(--line);
+            border-bottom: 5px solid var(--blue);
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0 10px 26px rgba(47, 79, 127, 0.10);
+        }
+
+        .thumb {
+            aspect-ratio: 4 / 3;
+            border-width: 0 0 3px 0;
+            box-shadow: none;
+        }
+
+        .card-body {
+            padding: 18px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 12px;
+        }
+
+        .cert-tag {
+            display: inline-flex;
+            width: fit-content;
+            border: 1px solid #d6c28f;
+            background: var(--gold-soft);
+            color: #7a4b0c;
+            border-radius: 999px;
+            padding: 4px 9px;
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        .contact-card .card-body {
+            min-height: 190px;
+        }
+
+        .social-icon {
+            width: 58px;
+            height: 58px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 14px;
+            color: #ffffff;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--blue), var(--violet));
+            box-shadow: var(--shadow);
+        }
+
+        .social-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .social-icon .fill-icon {
+            fill: currentColor;
+            stroke: none;
+        }
+
+        footer {
+            border-top: 3px solid var(--line);
+            padding: 30px 16px;
+            text-align: center;
+            color: var(--muted);
+            background: #ffffff;
+        }
+
+        footer p {
+            margin: 4px 0;
+        }
+
+        @media (max-width: 900px) {
+            .nav-wrap {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 16px 0;
+                gap: 12px;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            .brand-btn {
+                width: 100%;
+            }
+
+            .intro-bio,
+            .background-row,
+            .grid-feature,
+            .grid-feature.reverse {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-feature.reverse .media {
+                order: 0;
+            }
+
+            .awards-grid,
+            .contact-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 560px) {
+            main {
+                width: min(100% - 24px, 1140px);
+                padding-top: 28px;
+            }
+
+            .site-header {
+                position: static;
+            }
+
+            nav {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                width: 100%;
+            }
+
+            .nav-btn {
+                width: 100%;
+                padding: 9px 8px;
+                font-size: 0.84rem;
+            }
+
+            h1 {
+                font-size: clamp(2.35rem, 15vw, 3.6rem);
+            }
+
+            h2 {
+                font-size: clamp(1.9rem, 11vw, 2.8rem);
+            }
+
+            .eyebrow {
+                border-radius: 8px;
+                max-width: 100%;
+            }
+
+            .awards-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .slide {
+                flex-basis: 92%;
+            }
+        }
+    </style>
 </head>
-
 <body>
- <nav>
-    <ul>
-        <li><a href="#Biography">Biography</a></li>
-        <li><a href="activity.html">Extracurricular Activities</a></li>
-        <li><a href="awards.html">Awards & Achievements</a></li>
-        <li><a href="hobbies.html">Hobbies & Engagements</a></li>
-        <li><a href="contact.html">Contact Info</a></li>
-    </ul>
-</nav>
+    <header class="site-header">
+        <div class="nav-wrap">
+            <button class="nav-btn brand-btn active" type="button" data-page="biography">Mariam Mustazaf | Portfolio</button>
+            <nav aria-label="Primary navigation">
+                <button class="nav-btn active" type="button" data-page="biography">Biography</button>
+                <button class="nav-btn" type="button" data-page="activities">Activities</button>
+                <button class="nav-btn" type="button" data-page="projects">Projects</button>
+                <button class="nav-btn" type="button" data-page="awards">Awards</button>
+                <button class="nav-btn" type="button" data-page="contact">Contact</button>
+            </nav>
+        </div>
+    </header>
 
-<h1 style="padding: 50px;" section id="Biography">Biography</h1>
-<div class="container1">
-    <img src="mariampic.jpg" alt="Mariam's Photo" class="profile-img">
-   <p class="about-text"><strong>This is Mariam Mustazaf, an Afghan youth passionate about Medical Data Science and promoting women's rights in Afghanistan.<br> </strong>
-Born in summar of 2005 in Afghanistan a country of rich culture and history; I grew up amid the contrasting beauty of ancient traditions and modern challenges. From an early age, I have been driven to learn, and discover knowledge through science and mathematics; making me a strong candidate to receive a scholarship in Afghan-Turk Maarif Schools, Kabul Girls High School among thousands of girls applying for the program in 2019.<br>
-"Every catastrophe is also an opportunity." This quote perfectly encapsulates my journey and my passion for perseverance when schools got banned for girls beyond grade six in 2021, I chose to focus on the bright side of this tragic situation.<br>
-Therefore, I became one of the top 10 nominees for the 2021 Children’s Peace Prize among candidates from around the world for the recognition of my voluntary efforts to educate and mentor Afghan women and children. Over seven years of my volunteer jobs (2019-2026), I provided educational support, mentoring, and tutoring to over 1000 women at the Khadija Kubra Islamic Educational Center, the Lincoln Learning Center, and via home-schooling programs.  </p>
-</div>
+    <main>
+        <section class="page active" id="page-biography">
+            <div class="intro-bio">
+                <div class="intro-copy">
+                    <span class="eyebrow">Medical Data Science | Women’s Rights | Youth Empowerment</span>
+                    <h1>Mariam Mustazaf</h1>
+                    <p class="lede"><strong>This is Mariam Mustazaf, an Afghan youth passionate about Medical Data Science and promoting women's rights in Afghanistan.<br> </strong></p>
 
-<h1 class="head2">Background</h1>
-<div class="container2">
-    <img src="afghanturkschool.png" alt="Afghan-Turk School Photo" class="school-img">
-   <p class="about-text">Throughout my academic and volunteer journey, I have worked with several national and international organizations, expanding my knowledge in order to help Afghan women and children.<br>
-In January of 2024, I joined the Amala learning bridge program for raising awareness about mental illness through online platforms. In result, we were able to help and raise awareness among 500+ Afghan women in our 3 months seminars.<br>
-Later, I co-founded the Parvaaz Women’s Mental Health Support Foundation and continued our journey to support Afghan women mental health by providing weekly and monthly online sessions, reading book sessions, an online library, and one-on-one therapist support for over 700+ girls through our 8- month journey.<br>
-Moreover, being accepted in Alekain foundation become life-changing opportunity for me, enabling me pursue my educational journey, and bringing me closer to my greatest ambition, becoming one of the first medical data scientist in Afghanistan.<br>
-As a dedicated and goal-oriented Afghan girl who has devoted her life to empowering Afghan youths, I am determined to get my bachelor’s in Medical Data science; create my own non-profit organization to support individuals from vulnerable countries who are passionate about AI and technology in leveraging its potentials for positive and ethical implementation in the world.</p>
-</div>
+                    <details class="read-panel" open>
+                        <summary>Biography</summary>
+                        <div class="read-body">
+                            <ul>
+                                <li>Born in summar of 2005 in Afghanistan a country of rich culture and history; I grew up amid the contrasting beauty of ancient traditions and modern challenges. From an early age, I have been driven to learn, and discover knowledge through science and mathematics; making me a strong candidate to receive a scholarship in Afghan-Turk Maarif Schools, Kabul Girls High School among thousands of girls applying for the program in 2019.</li>
+                                <li>"Every catastrophe is also an opportunity." This quote perfectly encapsulates my journey and my passion for perseverance when schools got banned for girls beyond grade six in 2021, I chose to focus on the bright side of this tragic situation.</li>
+                                <li>Therefore, I became one of the top 10 nominees for the 2021 Children’s Peace Prize among candidates from around the world for the recognition of my voluntary efforts to educate and mentor Afghan women and children. Over seven years of my volunteer jobs (2019-2026), I provided educational support, mentoring, and tutoring to over 1000 women at the Khadija Kubra Islamic Educational Center, the Lincoln Learning Center, and via home-schooling programs.  </li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+                <div class="hero-photo">
+                    <img src="mariampic.jpg" alt="Mariam's Photo">
+                </div>
+            </div>
 
-<footer>
-    <p>© 2026 Mariam Mustazaf. All rights reserved.</p>
-    <p>Website created by Mariam Mustazaf</p>
-</footer>
+            <div class="background-row">
+                <div class="media">
+                    <img src="afghanturkschool.png" alt="Afghan-Turk School Photo">
+                </div>
+                <details class="read-panel">
+                    <summary>Background</summary>
+                    <div class="read-body">
+                        <ul>
+                            <li>Throughout my academic and volunteer journey, I have worked with several national and international organizations, expanding my knowledge in order to help Afghan women and children.</li>
+                            <li>In January of 2024, I joined the Amala learning bridge program for raising awareness about mental illness through online platforms. In result, we were able to help and raise awareness among 500+ Afghan women in our 3 months seminars.</li>
+                            <li>Later, I co-founded the Parvaaz Women’s Mental Health Support Foundation and continued our journey to support Afghan women mental health by providing weekly and monthly online sessions, reading book sessions, an online library, and one-on-one therapist support for over 700+ girls through our 8- month journey.</li>
+                            <li>Moreover, being accepted in Alekain foundation become life-changing opportunity for me, enabling me pursue my educational journey, and bringing me closer to my greatest ambition, becoming one of the first medical data scientist in Afghanistan.</li>
+                            <li>As a dedicated and goal-oriented Afghan girl who has devoted her life to empowering Afghan youths, I am determined to get my bachelor’s in Medical Data science; create my own non-profit organization to support individuals from vulnerable countries who are passionate about AI and technology in leveraging its potentials for positive and ethical implementation in the world.</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="page" id="page-activities">
+            <div class="section-head">
+                <span class="kicker">Experience</span>
+                <h2>Extracurricular Activities</h2>
+            </div>
+
+            <div class="grid-feature">
+                <div class="media">
+                    <img src="volunteer teacher.png" alt="Volunteer Work Image">
+                </div>
+                <div class="panel">
+                    <h3>Volunteer Work</h3>
+                    <ul>
+                        <li> My commitment to community service began early and reached international recognition when, at the age of fifteen, I was nominated for the <a href="https://www.kidsrights.org/persons/mariam/">International Children’s Peace Prize 2021</a> in recognition of my voluntary efforts to educate and mentor Afghan women and children.</li>
+                        <li>I started volunteer work at the Khadija Kubra Islamic Educational Center in 2019, where I provided educational support, mentoring, and tutoring to over 100 students in field of Islamic education.</li>
+                        <li>Following the political changes in Afghanistan in 2021, I intensified my efforts to support Afghan women and children through various initiatives such as home-schooling programs and online tutoring sessions.</li>
+                        <li>Although the situation in 2021 was challenging and courses were closing down, I remained consistent to support children education by organizing informal study groups and providing resources to ensure continued learning.</li>
+                        <li>Despite the difficulties, my commitment to education and community service has remained unwavering. Right now, I am a volunteer English Instructor in Afghanistan Changemakers Org where I support Afghan women and children in their English language learning journey.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid-feature reverse">
+                <div class="media">
+                    <img src="interpreter.png" alt="Interpreter and Translation Photo">
+                </div>
+                <div class="panel">
+                    <h3>Jobs</h3>
+                    <ul>
+                        <li>From June 2021-August 2022, I worked as a English-Persian Medical Translator In Reviva Beauty Hospital Kabul, Afghanistan. My responsibilities included translating medical documents, patient information, and facilitating communication between English-speaking medical staff and Persian-speaking patients.</li>
+                        <li>This experience allowed me to develop strong organizational and communication skills, as well as a deeper understanding of the healthcare system in Afghanistan.</li>
+                        <li>Overall, my time at Reviva Beauty Hospital was a valuable learning experience that enhanced my language skills and provided me with insight into the medical field.</li>
+                        <li>Subsequently, From September 2023-December 2025, I worked as an OPI (Over the Phone Interpreter) Medical Interpreter in Gaheez organization, where I provided real-time interpretation services for medical consultations over the phone. Through this experience, I further honed my language skills and gained a deeper understanding of medical terminology and healthcare settings.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid-feature">
+                <div class="media">
+                    <img src="internship.png" alt="Internship Work Image">
+                </div>
+                <div class="panel">
+                    <h3>Interships and Programs</h3>
+                    <ul>
+                        <li> My internship in Data-Sourcing by GAO-Tek org honed my skills in data collection, data cleaning, and data analysis.</li>
+                        <li>I have participated in several biology projects; expanding my knowledge in biology, data science, and healthcare. During my studies in school, my curiosity in biology and its impact on world made me receive certificate of recognition for my biology project for 3 consecutive years.</li>
+                        <li>I joined a 3- month program of AI and Data Science organised by UNDP and Horizon Bridge Consulting, where I explored how to make AI agents to further help in data tracking and data analysis and how artificial intelligence can be applied in healthcare system.</li>
+                        <li>Addionally, I completed a 3-month workshop on Business and Intreprenuership with UCA and Acceralate Prosperity org, where I learned the fundamentals of business planning, marketing strategies, and financial management.</li>
+                        <li>These experiences have equipped me with valuable skills and knowledge that I am eager to apply in my future academic and professional endeavors.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="page" id="page-projects">
+            <div class="section-head">
+                <span class="kicker">Technical Work</span>
+                <h2>Projects</h2>
+            </div>
+
+            <div class="grid-feature">
+                <div class="media">
+                    <img src="coding (1).jfif" alt="Coding Photo">
+                </div>
+                <div class="panel">
+                    <h3>Coding & Technical Development</h3>
+                    <ul>
+                        <li>I devote time to coding in HTML, CSS, Python, and using tools like Termux, building both websites and small applications.</li>
+                        <li>This technical hobby merges creativity with logic, allowing me to design functional, user-centered digital solutions.</li>
+                        <li>Each project enhances my analytical abilities and introduces me to new frameworks, reinforcing my belief that technology when coupled with purposecan become a powerful medium for education and positive change in underserved communities.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="carousel">
+                <h3>Website Work</h3>
+                <div class="carousel-track" aria-label="Website project images">
+                    <div class="slide">
+                        <div class="slide-frame"><img src="web1.png" alt="Website work image 1"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-frame"><img src="web2.png" alt="Website work image 2"></div>
+                    </div>
+                </div>
+                <p class="carousel-caption">This part shows my experience building websites, organizing page content, and turning ideas into functional digital spaces.</p>
+            </div>
+
+            <div class="carousel ai-carousel">
+                <h3>AI Model Making</h3>
+                <div class="carousel-track" aria-label="AI model project images">
+                    <div class="slide">
+                        <div class="slide-frame"><img src="mod1.png" alt="AI model image 1"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-frame"><img src="mod2.png" alt="AI model image 2"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-frame"><img src="mod3.png" alt="AI model image 3"></div>
+                    </div>
+                </div>
+                <p class="carousel-caption">This part highlights my experience with AI model making and GPT model made, connecting technical learning with practical problem-solving.</p>
+            </div>
+        </section>
+
+        <section class="page" id="page-awards">
+            <div class="section-head">
+                <span class="kicker">Recognition</span>
+                <h2>Awards and Achievements</h2>
+            </div>
+
+            <div class="awards-grid">
+                <article class="award-card"><div class="thumb"><img src="global money week_page-0001.jpg" alt="Global Money Week Certificate"></div><div class="card-body"><p><strong>Global Money Week Certificate, 2024, Financial literacy & youth empowerment</strong></p><div class="tags"><span class="cert-tag">Finance</span><span class="cert-tag">International</span><span class="cert-tag">Entrepreneurship</span></div></div></article>
+                <article class="award-card"><div class="thumb"><img src="building self-esteem.jpg" alt="Building Self-Esteem Certificate"></div><div class="card-body"><p><strong>Building Self-Esteem Certificate, 2024</strong></p><div class="tags"><span class="cert-tag">Women Empowerment</span><span class="cert-tag">Building Self-esteem</span><span class="cert-tag">Youth</span></div></div></article>
+                <article class="award-card"><div class="thumb"><img src="Amala Learning Bridge Projects Mariam Mustazaf_page-0001.jpg" alt="Amala Learning Bridge Projects Certificate"></div><div class="card-body"><p><strong>Amala Learning Bridge Projects Certificate, 2025</strong></p><div class="tags"><span class="cert-tag">Mental Health </span><span class="cert-tag">Raising awareness</span><span class="cert-tag">Psychology</span><span class="cert-tag">Critical Thinking</span></div></div></article>
+                <article class="award-card"><div class="thumb"><img src="volunteerteacher.jpg" alt="Volunteer Teacher Certificate"></div><div class="card-body"><p><strong>Volunteeer English Instructor, 2021</strong></p><div class="tags"><span class="cert-tag">Education</span><span class="cert-tag">Volunteer</span><span class="cert-tag">Youth-empowerment</span></div></div></article>
+                <article class="award-card"><div class="thumb"><img src="certificate of English .jpg" alt="Certificate of English"></div><div class="card-body"><p><strong>English Language Completion, 2024</strong></p><div class="tags"><span class="cert-tag">English Proficiency</span><span class="cert-tag">Self-buidling</span><span class="cert-tag">Education</span></div></div></article>
+                <article class="award-card"><div class="thumb"><img src="CERTIFICATE OF SOURCING_page-0001.jpg" alt="Certificate of Sourcing"></div><div class="card-body"><p><strong>Internship in Data Sourcing, 2025</strong></p><div class="tags"><span class="cert-tag">Finance</span><span class="cert-tag">Technology</span><span class="cert-tag">Computer system</span></div></div></article>
+                <article class="award-card"><div class="thumb"><img src="certificate_from_school_optimized_100.jpg" alt="School Certificate"></div><div class="card-body"><p><strong>School Honor Certificate, 2019</strong></p><div class="tags"><span class="cert-tag">Descipline</span><span class="cert-tag">Honor</span></div></div></article>
+                <article class="award-card"><div class="thumb"><img src="children peace prize.png" alt="Children's Peace Prize Certificate"></div><div class="card-body"><p><strong>Children's Peace Prize Nomination, 2021</strong></p><div class="tags"><span class="cert-tag">Children Empowerment</span><span class="cert-tag">International</span><span class="cert-tag">Education promoting</span></div></div></article>
+                <article class="award-card"><div class="thumb"><img src="Leadership workship by Nobel.jpg" alt="Leadership Workshop by Nobel Certificate"></div><div class="card-body"><p><strong>Leadership Workshop by Nobel, 2024</strong></p><div class="tags"><span class="cert-tag">Leadership</span><span class="cert-tag">International</span><span class="cert-tag">Exchange Forum</span><span class="cert-tag">Cross-cultural understanding</span></div></div></article>
+                <article class="award-card"><div class="thumb"><img src="research.jpg" alt="Research Certificate"></div><div class="card-body"><p><strong>Research Methodology, 2024</strong></p><div class="tags"><span class="cert-tag">Research Methodology</span><span class="cert-tag">Internet Exploration</span></div></div></article>
+                <article class="award-card"><div class="thumb"><img src="who.jpg" alt="WHO Certificate"></div><div class="card-body"><p><strong>CBDE Preparedeness, 2023</strong></p><div class="tags"><span class="cert-tag">Healthcare education</span><span class="cert-tag">International org</span><span class="cert-tag">Public Health</span></div></div></article>
+            </div>
+        </section>
+
+        <section class="page" id="page-contact">
+            <div class="section-head">
+                <span class="kicker">Contact Info</span>
+                <h2>Let's Connect! 🌟</h2>
+            </div>
+            <div class="contact-grid">
+                <article class="contact-card">
+                    <div class="card-body">
+                        <div class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"></rect><circle cx="12" cy="12" r="3.5"></circle><circle class="fill-icon" cx="17" cy="7" r="1.1"></circle></svg></div>
+                        <h3>Instagram</h3>
+                        <a href="https://instagram.com/m_mustazaf" class="social-link">Follow Me</a>
+                    </div>
+                </article>
+                <article class="contact-card">
+                    <div class="card-body">
+                        <div class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 10v8"></path><path d="M10 18v-5c0-2 1.2-3.2 3-3.2s3 1.2 3 3.2v5"></path><circle class="fill-icon" cx="6" cy="6" r="1.5"></circle></svg></div>
+                        <h3>LinkedIn</h3>
+                        <a href="https://linkedin.com/in/MariamMustazaf" class="social-link">Connect</a>
+                    </div>
+                </article>
+                <article class="contact-card">
+                    <div class="card-body">
+                        <div class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 19c-4 1.2-4-2-5-2.5"></path><path d="M15 22v-3.5c0-1 .3-1.7.8-2.2 2.8-.3 5.7-1.4 5.7-6A4.7 4.7 0 0 0 20.2 7c.1-.4.5-1.9-.2-3.2 0 0-1.1-.3-3.5 1.3a12.1 12.1 0 0 0-6.4 0C7.7 3.5 6.6 3.8 6.6 3.8 5.9 5.1 6.3 6.6 6.4 7A4.7 4.7 0 0 0 5 10.3c0 4.6 2.9 5.7 5.7 6 .4.4.8 1.2.8 2.2V22"></path></svg></div>
+                        <h3>GitHub</h3>
+                        <a href="https://github.com/mariammustazaf-crypto" class="social-link">View Projects</a>
+                    </div>
+                </article>
+                <article class="contact-card">
+                    <div class="card-body">
+                        <div class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg></div>
+                        <h3>Email</h3>
+                        <a href="mailto:mariammustazaf@gmail.com" class="social-link">Send Email</a>
+                    </div>
+                </article>
+                <article class="contact-card">
+                    <div class="card-body">
+                        <div class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5Z"></path><path d="M9.5 8.5c.2 3 2.1 5 5 6l1.4-1.4"></path></svg></div>
+                        <h3>WhatsApp</h3>
+                        <a href="https://wa.me/qr/SGVXGPTKD6DZE1" class="social-link">Contact Me</a>
+                    </div>
+                </article>
+                <article class="contact-card">
+                    <div class="card-body">
+                        <div class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9.2 9a3 3 0 1 1 4.8 2.4c-1 .7-1.5 1.2-1.5 2.6"></path><path d="M12 18h.01"></path><circle cx="12" cy="12" r="9"></circle></svg></div>
+                        <h3>Comment/Ask Questions</h3>
+                        <a href="questions.html" class="social-link">Ask Your Questions</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Mariam Mustazaf. All rights reserved.</p>
+        <p>Website created by Mariam Mustazaf</p>
+    </footer>
+
+    <script>
+        const buttons = document.querySelectorAll(".nav-btn[data-page]");
+        const pages = document.querySelectorAll(".page");
+
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const target = button.dataset.page;
+
+                pages.forEach((page) => {
+                    page.classList.toggle("active", page.id === `page-${target}`);
+                });
+
+                buttons.forEach((item) => {
+                    item.classList.toggle("active", item.dataset.page === target);
+                });
+
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        });
+    </script>
 </body>
 </html>
